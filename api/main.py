@@ -7,7 +7,9 @@ import os
 import uuid
 import logging
 import shutil
+from dotenv import load_dotenv
 
+load_dotenv()
 
 logging.basicConfig(filename='app.log', level=logging.INFO)
 app = FastAPI()
