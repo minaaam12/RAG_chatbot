@@ -3,7 +3,7 @@ langchain-openai
 langchain-core
 langchain_community
 docx2txt
-pypdf
+pymupdf
 langchain_chroma
 python-multipart
 streamlit

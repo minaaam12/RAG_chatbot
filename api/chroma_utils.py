@@ -9,7 +9,7 @@ import os
 
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200, length_function=len)
 embedding_function = OpenAIEmbeddings()
-vector_store = Chroma(persis_directory ="./chroma_db", embedding_function=embedding_function)
+vector_store = Chroma(persist_directory ="./chroma_db", embedding_function=embedding_function)
 
 
 def load_and_split_document(file_path):

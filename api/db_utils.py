@@ -10,7 +10,7 @@ def get_db_connection():
 
 
 def create_application_logs():
-    with get_db_connection as conn:
+    with get_db_connection() as conn:
         conn.execute('''CREATE TABLE IF NOT EXISTS application_logs
                         (id INTEGER PRIMARY KEY AUTOINCREMENT,
                         session_id TEXT,
@@ -22,7 +22,7 @@ def create_application_logs():
 
 def insert_application_logs(session_id, user_query, gpt_response, model):
     with get_db_connection() as conn:
-        conn.execute('INSERT INTO application_logs (session_id, user_query, gpt_response, moded) VALUES (?, ?, ?, ?)',
+        conn.execute('INSERT INTO application_logs (session_id, user_query, gpt_response, model) VALUES (?, ?, ?, ?)',
                      (session_id, user_query, gpt_response, model))
         conn.commit()
 
@@ -44,7 +44,7 @@ def get_chat_history(session_id):
 def create_document_store():
     with get_db_connection() as conn:
         conn.execute('''CREATE TABLE IF NOT EXISTS document_store
-                     (id INTEGER PRIMARY KEY AUTPINCREMENT,
+                     (id INTEGER PRIMARY KEY AUTOINCREMENT,
                      filename TEXT,
                      upload_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP)''')
 
@@ -61,7 +61,7 @@ def insert_document_record(filename):
 
 def delete_document_record(file_id):
     with get_db_connection() as conn:
-        conn.execute('DELETE FORM document_store WHERE id = ?', (file_id,))
+        conn.execute('DELETE FROM document_store WHERE id = ?', (file_id,))
         conn.commit()
         return True
     
